@@ -1,0 +1,149 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500&family=JetBrains+Mono:wght@800&display=swap");
+
+/* Custom Properties */
+:root {
+  --color-text: #222;
+  --color-bg: #fff;
+  --color-bg-hover: #f99;
+
+  --fs-info: min(4vmin, 1.25rem);
+  --fs-instructions: min(6vmin, 2rem);
+  --fs-bpm: min(36vmin, 14rem);
+
+  --fade-length: 0ms;
+}
+
+.fade {
+  --fade-length: 250ms;
+}
+
+@font-face {
+  font-family: desg7;
+  src: url('DSEG7Classic-BoldItalic.woff') format('woff');
+}
+
+/* Dark theme class */
+.dark-mode {
+  --color-text: #ffffff;
+  --color-bg: #000000;
+  --color-bg-hover: #ff2525;
+}
+
+/* Animations */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* General Styling */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  font-family: "IBM Plex Mono", monospace;
+}
+
+::selection {
+  color: var(--color-bg);
+  background: var(--color-text);
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  place-items: center;
+  padding: calc(0.5rem + 4vh);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  transition: background-color var(--fade-length) ease-in-out;
+}
+
+body > p,
+header > h1 {
+  font-weight: 400;
+  font-size: var(--fs-info);
+  animation: fade-in var(--fade-length) ease-in-out forwards;
+}
+
+/* Custom Styling */
+header {
+  display: flex;
+  align-items: center;
+}
+
+#theme-toggle {
+  box-sizing: content-box;
+  height: calc(var(--fs-info) * 1.1);
+  padding: calc(var(--fs-info) * 0.25);
+  margin-left: calc(var(--fs-info) * 0.6);
+  border-radius: 50%;
+  cursor: pointer;
+  background-color: var(--color-text);
+  transition: filter 200ms ease-out;
+}
+
+#theme-toggle:hover,
+#theme-toggle:focus {
+  filter: invert(15%);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.container > * {
+  animation: fade-in var(--fade-length) ease-in-out forwards;
+}
+
+#instructions {
+  margin-bottom: min(14rem, 14vh);
+  text-align: center;
+  font-size: var(--fs-instructions);
+}
+
+#bpm {
+  overflow: hidden;
+  font-family: desg7;
+  font-size: var(--fs-bpm);
+  font-weight: bold;
+  transition: filter 10ms;
+  line-height: 1;
+}
+
+#reset {
+  border: 1px solid var(--color-text);
+  border-radius: 0.5rem;
+  cursor: pointer;
+  padding: 1rem 2rem;
+  margin-block: min(4rem, 4vh);
+  box-shadow: none;
+  font-size: var(--fs-instructions);
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  transition: background-color var(--fade-length), letter-spacing var(--fade-length);
+}
+
+#reset:hover,
+#reset:focus {
+  background-color: var(--color-bg-hover);
+  letter-spacing: 1px;
+}
+
+
+/* Helper Class */
+.prevent-select {
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+}

@@ -1,0 +1,89 @@
+<html>
+<title>Clock</title>
+<head>
+<style>
+@font-face {
+  font-family: desg14;
+  src: url('styles/DSEG14Classic-Bold.woff') format('woff');
+}
+
+body {
+  text-align: center;
+  vertical-align: middle;
+  font-family: desg14;
+}
+
+table {
+  border-collapse: collapse;
+}
+td {
+  border: 1px solid black;
+  padding: 5px 20px;
+  text-align: center;
+}
+
+#selectcolor > option{
+  background-color: black;
+}
+
+button, .settings, input[type="text"]{
+  background-color: black;
+  color: red;
+  font-family: desg14;
+  font-size: 400%
+}
+
+input[type="text"]{
+  text-align: center;
+}
+</style>
+</head>
+<body>
+<table align="center"><tr>
+<td>Size:
+<select id="selectsize">
+	<option value="1">1</option>
+	<option value="2">2</option>
+	<option value="3">3</option>
+	<option value="4" selected>4</option>
+	<option value="5">5</option>
+	<option value="6">6</option>
+	<option value="7">7</option>
+	<option value="8">8</option>
+	<option value="9">9</option>
+	<option value="10">10</option>
+	<option value="11">11</option>
+	<option value="12">12</option>
+</select></td>
+<td>Colon:<input type="checkbox" id="selectcolon" checked/></td>
+<td>Dot:<input type="checkbox" id="selectdot" /></td>
+<td>Number Color:
+<select id="selectcolor">
+	<option value="0" style="color: ff0000" selected>RED</option>
+	<option value="1" style="color: 00ff00">GREEN</option>
+	<option value="2" style="color: ffff00">YELLOW</option>
+	<option value="3" style="color: ffffff">WHITE</option>
+	<option value="4" style="color: d1232a">(Masterclock) RED</option>
+	<option value="5" style="color: 40ae49">(Masterclock) GREEN</option>
+	<option value="6" style="color: 00aeef">(Masterclock) BLUE</option>
+	<option value="7" style="color: fbcb0b">(Masterclock) AMBER</option>
+	<option value="8" style="color: ffa500">ORANGE</option>
+</select></td>
+</tr></table><br>
+
+<table align="center" border="2">
+<tr><td><button onclick="window.open('clock.html?size=' + document.getElementById('selectsize').value + '&colon=' + document.getElementById('selectcolon').checked + '&dot=' + document.getElementById('selectdot').checked + '&color=' + document.getElementById('selectcolor').value,'window','toolbar=no,menubar=no,resizable=yes,width=1400,height=380');">Open!Clock</button></td>
+
+<td><span style='font-size:70px;'>&#128314;</span><button onclick="window.open('cntupdn.html?size=' + document.getElementById('selectsize').value + '&colon=' + document.getElementById('selectcolon').checked + '&dot=' + document.getElementById('selectdot').checked + '&color=' + document.getElementById('selectcolor').value,'window','toolbar=no,menubar=no,resizable=yes,width=1400,height=380');">Count!Up</button><span style='font-size:70px;'>&#128314;</span></td></tr>
+
+<tr><td><span style='font-size:70px;'>&#127919;</span><button onclick="window.open('cntto.html?size=' + document.getElementById('selectsize').value + '&colon=' + document.getElementById('selectcolon').checked + '&dot=' + document.getElementById('selectdot').checked + '&color=' + document.getElementById('selectcolor').value + '&h=' + document.getElementById('cnttoh').value + '&m=' + document.getElementById('cnttom').value + '&s=' + document.getElementById('cnttos').value + '&up=' + document.getElementById('toup').checked,'window','toolbar=no,menubar=no,resizable=yes,width=1400,height=380');">Count!TO</button><span style='font-size:70px;'>&#127919;</span><br><input type="text" id="cnttoh" value="24" maxlength="2" size="2"><span class="settings">:</span><input type="text" id="cnttom" value="0" maxlength="2" size="2"><span class="settings">:</span><input type="text" id="cnttos" value="0" maxlength="2" size="2"><br><input type="radio" id="toup" name="cnttosel" checked/>&#10548; Bounce &emsp;|&emsp;<input type="radio" name="cnttosel"/>&#128721; Stop</td>
+
+<td><span style='font-size:70px;'>&#128315;</span><button onclick="window.open('cntupdn.html?size=' + document.getElementById('selectsize').value + '&colon=' + document.getElementById('selectcolon').checked + '&dot=' + document.getElementById('selectdot').checked + '&color=' + document.getElementById('selectcolor').value + '&dir=dn' + '&h=' + document.getElementById('cntdnh').value + '&m=' + document.getElementById('cntdnm').value + '&s=' + document.getElementById('cntdns').value,'window','toolbar=no,menubar=no,resizable=yes,width=1400,height=380');">Count!Down</button><span style='font-size:70px;'>&#128315;</span><br><input type="text" id="cntdnh" value="0" maxlength="2" size="2"><span class="settings">:</span><input type="text" id="cntdnm" value="5" maxlength="2" size="2"><span class="settings">:</span><input type="text" id="cntdns" value="0" maxlength="2" size="2"></td></tr>
+</table>
+
+<br>
+<table align="center" border="2">
+<tr><td>Tap Memory: <input type="number" id="texttapmem" value=8 min="1" max="99" size="2"/></td></tr>
+<tr><td><span style='font-size:60px;'>&#128070;</span><button style="color: white;" onclick="window.open('bpm-tap.html?tapmem=' + document.getElementById('texttapmem').value,'window');">bpm-tap</button><span style='font-size:60px;'>&#128070;</span></td></tr>
+</table>
+</html>

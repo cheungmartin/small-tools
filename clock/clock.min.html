@@ -1,0 +1,53 @@
+<html>
+<head>
+<style>
+@font-face {
+  font-family: desg7;
+  src: url('styles/DSEG7Classic-BoldItalic.woff') format('woff');
+}
+body{
+  text-align: center;
+  color: ff0000;
+  background-color: #000000;
+  font-family: desg7;
+}
+.hiddenText{
+  color: #000000;
+  font-size: 1px;
+}
+#txt{
+  font-size: 800%;
+}
+</style>
+<script>
+function startTime() {
+  var today = new Date();
+  var h = today.getHours();
+  var m = today.getMinutes();
+  var s = today.getSeconds();
+  var ms = today.getMilliseconds();
+  if (ms < 500){
+    var n = 500 - ms;
+  }else{
+    var n = 1000 - ms;
+  }
+  h = checkTime(h);
+  m = checkTime(m);
+  s = checkTime(s);
+  document.getElementById('txt').innerHTML = h + ":" + m + ":" + s;
+  document.getElementById('txt2').innerHTML = h + " " + m + " " + s;
+  var t = setTimeout(startTime, n);
+}
+function checkTime(i) {
+  if (i < 10) {i = "0" + i};
+  return i;
+}
+</script>
+</head>
+
+<body onload="startTime(); window.resizeTo(770, 254);">
+<div class="hiddenText">&nbsp;</div>
+<div id="txt"></div>
+<div class="hiddenText" id="txt2"></div>
+</body>
+</html>

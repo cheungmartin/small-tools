@@ -1,0 +1,120 @@
+<html>
+<head>
+<style>
+@font-face {
+  font-family: desg7;
+  src: url('styles/DSEG7Classic-BoldItalic.woff') format('woff');
+}
+body{
+  text-align: center;
+  background-color: #000000;
+  font-family: desg7;
+}
+.hiddenText{
+  color: #000000;
+  font-size: 1px;
+}
+</style>
+<script>
+function getUrlVars() {
+  var vars = {};
+  var parts = window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+    vars[key] = value;
+  });
+  return vars;
+}
+function getUrlParam(parameter, defaultvalue){
+  var urlparameter = defaultvalue;
+  if(window.location.search.indexOf(parameter) > -1){
+    urlparameter = getUrlVars()[parameter];
+  }
+  return urlparameter;
+}
+
+var cs = getUrlParam('size','4');
+document.documentElement.style.fontSize = cs*200 + "%";
+
+var enableColon = getUrlParam('colon','true');
+if (enableColon == 'true'){
+  var arc = [':',':']
+}else{
+  var arc = [':',' ']
+}
+
+var enableDot = getUrlParam('dot','false');
+if (enableDot == 'true'){
+  var ard = ['.',' ']
+}else{
+  var ard = [' ',' ']
+}
+
+var arbk = ['ffffff', '000000'];
+
+var cc = getUrlParam('color','0');
+var arcc = ['ff0000', '00ff00', 'ffff00', 'ffffff', 'd1232a', '40ae49', '00aeef', 'fbcb0b', 'ffa500'];	// Red, Green, Yellow, White, (Masterclock) Red, (Masterclock) Green, (Masterclock) Blue, (Masterclock) Amber
+document.documentElement.style.color = arcc[cc];
+
+var upback = getUrlParam('up','true');
+
+var endh = getUrlParam('h',24);
+var endm = getUrlParam('m',0);
+var ends = getUrlParam('s',0);
+endh = parseInt(endh == '' ? 24 : endh);
+endm = parseInt(endm == '' ? 0 : endm);
+ends = parseInt(ends == '' ? 0 : ends);
+var target = new Date();
+target.setHours(endh);
+target.setMinutes(endm);
+target.setSeconds(ends);
+
+function startTime() {
+  var today = new Date();
+  var h,m,s;
+  if (target > today || upback != 'true')	//count down
+    diff = (((target - today) / 1000) | 0);
+  if (target < today & upback == 'true')	//count up
+    diff = (((today - target) / 1000) | 0) + 1;
+  h = diff / 3600 | 0;
+  m = (diff - h*3600) / 60 | 0;
+  s = (diff - h*3600 - m*60) % 60 | 0;
+  
+  var ms = today.getMilliseconds();
+  if (ms < 500){
+    var colon = arc[0];
+    var dot = ard[0];
+	var timesup = arbk[0];
+    var n = 500 - ms;		//target n to meet 500ms
+  }else{
+    var colon = arc[1];
+    var dot = ard[1];
+	var timesup = arbk[1];
+    var n = 1000 - ms;		//target n to meet 0ms
+  }
+
+  if (diff <= 0 & upback != 'true'){ //flashing zero
+    h = 0;
+    m = 0;
+    s = 0;
+    document.body.style.backgroundColor = timesup;
+    document.getElementById('txt2').style.color = timesup;
+  }
+  h = checkTime(h);
+  m = checkTime(m);
+  s = checkTime(s);
+  document.getElementById('txt').innerHTML = h + "\xa0" + colon + "\xa0" + m + "\xa0" + colon + "\xa0" + s + dot;
+  document.getElementById('txt2').innerHTML = h + " " + m + " " + s;	// Do not remove this, this help to display 147 correctly
+  var t = setTimeout(startTime, n);	//target n=500
+}
+function checkTime(i) {
+  if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+  return i;
+}
+</script>
+</head>
+
+<body onload="startTime(); window.resizeTo(cs*200+50, cs*36+110);">
+<div class="hiddenText">&nbsp;</div>
+<div id="txt"></div>
+<div class="hiddenText" id="txt2"></div>
+</body>
+</html>
