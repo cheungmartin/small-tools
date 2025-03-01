@@ -37,6 +37,24 @@ input[type="text"]{
   text-align: center;
 }
 </style>
+<script>
+var clockcolorlist = [
+	'ff0000',
+	'00ff00',
+	'ffff00',
+	'ffffff',
+	'd1232a',
+	'40ae49',
+	'00aeef',
+	'fbcb0b',
+	'ffa500'
+];
+
+function changecolor(color){
+	var styleee = document.styleSheets[0].cssRules[5].style; //Style sheet sequence related
+	styleee.color = clockcolorlist[color];
+}
+</script>
 </head>
 <body>
 <table align="center"><tr>
@@ -58,7 +76,7 @@ input[type="text"]{
 <td>Colon:<input type="checkbox" id="selectcolon" checked/></td>
 <td>Dot:<input type="checkbox" id="selectdot" /></td>
 <td>Number Color:
-<select id="selectcolor">
+<select id="selectcolor" onchange="changecolor(this.value);">
 	<option value="0" style="color: ff0000" selected>RED</option>
 	<option value="1" style="color: 00ff00">GREEN</option>
 	<option value="2" style="color: ffff00">YELLOW</option>
